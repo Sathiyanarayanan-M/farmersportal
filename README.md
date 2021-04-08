@@ -1,7 +1,11 @@
 # farmersportal
 
-Cd <Service>
-npm start 
+### Cd (any service)
+### npm start 
   
 
-Create your own branch, push your changes and make a PR :)
+#### Create your own branch, push your changes and make a PR :)
+
+### to run all service
+
+## npm start (@root directory)
