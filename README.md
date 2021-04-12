@@ -9,4 +9,4 @@ Clone the repo: ``git clone https://github.com/Harishwarrior/farmersportal.git``
 
 ### to run all service
 
-## ``npm start`` (@root directory)
+### ``npm start`` (@root directory)
