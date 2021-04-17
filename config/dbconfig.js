@@ -1,18 +1,18 @@
-import mongoose from "mongoose";
+import mongo from "mongodb";
+const databaseName = "farmersportal";
+import dotenv from "dotenv";
+dotenv.config({ path: "../config/config.env" });
+const connectionURL = process.env.URI;
+
+const client = new mongo.MongoClient(connectionURL, { useNewUrlParser: true });
 
 export const connectDB = async () => {
   try {
-    console.log(process.env.URI);
-    const conn = await mongoose.connect(process.env.URI, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-    });
-
-    console.log(`MongoDB connected: ${conn.connection.host}`);
+    await client.connect();
+    const db = client.db(databaseName);
+    console.log("connected to mongodb atlas successfully");
+    return db;
   } catch (err) {
-    console.log(err);
-    process.exit(1);
+    console.log("error making connection!");
   }
 };
