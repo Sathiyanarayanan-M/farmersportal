@@ -2,17 +2,17 @@ import express from "express";
 import userRouter from "./routes/user.js";
 import { connectDB } from "../config/dbconfig.js";
 import dotenv from "dotenv";
-
 dotenv.config({ path: "../config/config.env" });
+
 const server = express();
 
 // connect to mongodb atlas
-connectDB();
+export const db = await connectDB();
 
 server.use(express.json());
 
-server.listen(3000, () => {
-  console.log("Server Running on port 3000");
+server.listen(process.env.PORT, () => {
+  console.log(`Server is running on PORT ${process.env.PORT}`);
 });
 
 server.get("/", (req, res) => {

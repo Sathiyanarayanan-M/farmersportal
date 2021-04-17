@@ -1,12 +1,12 @@
-import User from "../models/user.js";
+import { db } from "../index.js";
 
-export const addUser = async (req, res, next) => {
+export const addUser = async (req, res) => {
   console.log(req.body);
   try {
-    const user = await User.create(req.body);
+    const user = await db.collection("users").insertOne(req.body);
     return res.status(200).send({
       sucess: true,
-      data: user,
+      data: user.ops,
     });
   } catch (err) {
     console.log(err);
@@ -17,11 +17,12 @@ export const addUser = async (req, res, next) => {
 };
 
 export const getUser = (req, res) => {
-  const user = User.findOne({ username: "harish" }, (err, res) => {
+  const { username } = req.params;
+  const user = db.collection("users").findOne({ username }, (err, results) => {
     if (err) console.error(err);
     else {
       res.send({
-        data: res,
+        data: results,
         status: "success",
       });
     }
